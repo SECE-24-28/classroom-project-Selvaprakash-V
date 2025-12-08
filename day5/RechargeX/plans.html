@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Plans</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+<body id="plansPage" class="bg-slate-950 text-white">
+    <header class="sticky top-0 z-30 bg-slate-950/90 backdrop-blur border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-900 font-black">RX</div>
+                <p class="font-semibold">RechargeX</p>
+            </a>
+            <nav class="hidden md:flex items-center gap-6 text-sm text-slate-200">
+                <a href="index.html" class="hover:text-amber-200">Home</a>
+                <a href="plans.html" class="text-amber-200 font-semibold">Plans</a>
+                <a href="recharge.html" class="hover:text-amber-200">Recharge</a>
+                <a href="login.html" class="hover:text-amber-200">Login</a>
+            </nav>
+            <a href="register.html" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400 to-orange-600 text-slate-900 font-semibold shadow-lg shadow-orange-500/30">Create account</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+        <section class="grid md:grid-cols-3 gap-6 items-start">
+            <div class="md:col-span-2 space-y-3">
+                <p class="text-amber-200 text-sm font-semibold">Browse curated plans</p>
+                <h1 class="text-3xl md:text-4xl font-bold">Pick the perfect recharge</h1>
+                <p class="text-slate-300">Filter by operator and price range. Cards update instantly with data, validity, and perks.</p>
+            </div>
+            <div class="flex md:justify-end">
+                <a href="recharge.html" class="px-5 py-3 rounded-xl bg-white/10 border border-white/10 hover:border-amber-300 text-white transition">Go to recharge</a>
+            </div>
+        </section>
+
+        <section class="glass p-6 rounded-2xl border border-white/10 shadow-lg shadow-amber-500/10">
+            <div class="grid md:grid-cols-3 gap-4 items-end">
+                <div class="space-y-2">
+                    <label class="text-sm text-slate-300" for="operatorSelect">Operator</label>
+                    <select id="operatorSelect" class="w-full bg-slate-900/60 border border-white/15 rounded-lg px-4 py-3 focus:outline-none focus:border-amber-300">
+                        <option value="airtel">Airtel</option>
+                        <option value="jio">Jio</option>
+                        <option value="vi">Vi</option>
+                        <option value="bsnl">BSNL</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm text-slate-300" for="priceFilter">Max price (₹)</label>
+                    <div class="flex items-center gap-3">
+                        <input id="priceFilter" type="range" min="99" max="2000" step="10" value="2000" class="w-full accent-amber-400">
+                        <span id="priceValue" class="w-16 text-right font-semibold">₹2000</span>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm text-slate-300">Quick actions</label>
+                    <div class="flex gap-3">
+                        <button id="resetPlans" class="flex-1 px-4 py-3 rounded-lg border border-white/15 text-white hover:border-amber-300">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="flex items-center justify-between mb-4 text-sm text-slate-300">
+                <span>Showing plans</span>
+                <span id="plansCount" class="text-amber-200">0 plans</span>
+            </div>
+            <div id="plansGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-6 text-center text-sm text-slate-300">
+            <p>RechargeX</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
