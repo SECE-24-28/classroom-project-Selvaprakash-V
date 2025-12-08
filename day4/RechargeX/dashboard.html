@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .btn-primary {
+            @apply px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400 to-orange-600 text-slate-900 font-semibold shadow-lg shadow-orange-500/30 hover:shadow-orange-400/40 transition;
+        }
+        .btn-secondary {
+            @apply px-4 py-2 rounded-lg border border-white/15 text-white hover:border-amber-300 hover:bg-white/5 transition;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white">
+    <header class="sticky top-0 z-30 bg-slate-950/90 backdrop-blur border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-900 font-black">RX</div>
+                <p class="font-semibold">RechargeX</p>
+            </a>
+            <nav class="hidden md:flex items-center gap-6 text-sm text-slate-200">
+                <a href="index.html" class="hover:text-amber-200 transition">Home</a>
+                <a href="dashboard.html" class="text-amber-200 font-semibold">Dashboard</a>
+                <a href="recharge.html" class="hover:text-amber-200 transition">Recharge</a>
+                <a href="plans.html" class="hover:text-amber-200 transition">Plans</a>
+                <a href="login.html" class="hover:text-amber-200 transition">Login</a>
+            </nav>
+            <button id="logoutBtn" class="btn-secondary">Logout</button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10">
+        <!-- Welcome Section -->
+        <section class="mb-10">
+            <h1 class="text-4xl font-bold mb-2">Welcome, Alex Johnson</h1>
+            <p class="text-slate-300">Manage your recharges and track your activity</p>
+        </section>
+
+        <!-- Profile Card -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-6">Your Profile</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-900/40 border border-white/10 rounded-2xl p-6">
+                    <h3 class="text-xl font-semibold mb-4">Account Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-400">Name</span>
+                            <span id="dashboardName" class="font-semibold">Alex Johnson</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-400">Email</span>
+                            <span id="dashboardEmail" class="font-semibold">alex@example.com</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-400">Phone</span>
+                            <span id="dashboardPhone" class="font-semibold">9876543210</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-400">Registered Since</span>
+                            <span id="dashboardRegistered" class="font-semibold">Dec 2024</span>
+                        </div>
+                    </div>
+                    <button class="btn-secondary w-full mt-6">Edit Profile</button>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="bg-slate-900/40 border border-white/10 rounded-2xl p-6">
+                    <h3 class="text-xl font-semibold mb-4">Your Rewards</h3>
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border border-emerald-500/30 rounded-xl p-4">
+                            <p class="text-slate-400 text-sm">Total Cashback Earned</p>
+                            <p class="text-3xl font-bold text-emerald-400">₹1,250</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-sky-500/20 to-sky-600/10 border border-sky-500/30 rounded-xl p-4">
+                            <p class="text-slate-400 text-sm">Total Recharges</p>
+                            <p class="text-3xl font-bold text-sky-400">8</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 rounded-xl p-4">
+                            <p class="text-slate-400 text-sm">Available Balance</p>
+                            <p class="text-3xl font-bold text-amber-400">₹500</p>
+                        </div>
+                    </div>
+                    <button class="btn-primary w-full mt-6">View All Rewards</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Saved Numbers Section -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-6">Saved Mobile Numbers</h2>
+            <div class="bg-slate-900/40 border border-white/10 rounded-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-slate-900/60 border-b border-white/10">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Number</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Operator</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Circle</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="savedNumbersList" class="divide-y divide-white/5">
+                            <tr>
+                                <td class="px-6 py-4 text-sm">9876543210</td>
+                                <td class="px-6 py-4 text-sm">Jio</td>
+                                <td class="px-6 py-4 text-sm">Delhi NCR</td>
+                                <td class="px-6 py-4 text-sm"><button class="text-amber-400 hover:text-amber-300 transition">Recharge</button></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm">9123456789</td>
+                                <td class="px-6 py-4 text-sm">Airtel</td>
+                                <td class="px-6 py-4 text-sm">Mumbai</td>
+                                <td class="px-6 py-4 text-sm"><button class="text-amber-400 hover:text-amber-300 transition">Recharge</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recharge History Section -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-6">Recent Recharge History</h2>
+            <div class="bg-slate-900/40 border border-white/10 rounded-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-slate-900/60 border-b border-white/10">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Date</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Number</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Operator</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Plan</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Amount</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rechargeHistory" class="divide-y divide-white/5">
+                            <tr>
+                                <td class="px-6 py-4 text-sm">Dec 8, 2024</td>
+                                <td class="px-6 py-4 text-sm">9876543210</td>
+                                <td class="px-6 py-4 text-sm">Jio</td>
+                                <td class="px-6 py-4 text-sm">2 GB / 28 Days</td>
+                                <td class="px-6 py-4 text-sm">₹199</td>
+                                <td class="px-6 py-4 text-sm"><span class="px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-sm">Dec 5, 2024</td>
+                                <td class="px-6 py-4 text-sm">9123456789</td>
+                                <td class="px-6 py-4 text-sm">Airtel</td>
+                                <td class="px-6 py-4 text-sm">3 GB / 28 Days</td>
+                                <td class="px-6 py-4 text-sm">₹249</td>
+                                <td class="px-6 py-4 text-sm"><span class="px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold">Success</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <section class="flex flex-wrap gap-4 mb-10">
+            <a href="recharge.html" class="btn-primary">Start New Recharge</a>
+            <a href="plans.html" class="btn-primary">Browse Plans</a>
+            <button id="logoutBtn2" class="btn-secondary">Logout</button>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-6 text-center text-sm text-slate-300">
+            <p>RechargeX</p>
+        </div>
+    </footer>
+
+    <script>
+        // Day 4: JavaScript Functionality for Dashboard Page
+        
+        // DOM elements
+        const welcomeHeading = document.querySelector('main h1');
+        const dashboardName = document.getElementById('dashboardName');
+        const dashboardEmail = document.getElementById('dashboardEmail');
+        const dashboardPhone = document.getElementById('dashboardPhone');
+        const dashboardRegistered = document.getElementById('dashboardRegistered');
+        const savedNumbersList = document.getElementById('savedNumbersList');
+        const rechargeHistoryTable = document.getElementById('rechargeHistory');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const logoutBtn2 = document.getElementById('logoutBtn2');
+
+        // Sample saved numbers
+        const savedNumbers = [
+            { number: '9876543210', operator: 'Jio', circle: 'Delhi NCR' },
+            { number: '9123456789', operator: 'Airtel', circle: 'Mumbai' },
+            { number: '8765432109', operator: 'Vi', circle: 'Karnataka' }
+        ];
+
+        // Load user data from localStorage
+        function loadUserData() {
+            const user = localStorage.getItem('rechargeXUser');
+            
+            if (!user) {
+                // Redirect to login if not logged in
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const userData = JSON.parse(user);
+            
+            // Update profile information
+            dashboardName.textContent = userData.name || 'User';
+            dashboardEmail.textContent = userData.email || 'user@example.com';
+            welcomeHeading.textContent = `Welcome, ${userData.name || 'User'}`;
+            
+            // Check if user is in registered users
+            const users = JSON.parse(localStorage.getItem('rechargeXUsers') || '[]');
+            const registeredUser = users.find(u => u.email === userData.email);
+            
+            if (registeredUser) {
+                dashboardPhone.textContent = registeredUser.phone || 'Not provided';
+                
+                // Format registration date
+                if (registeredUser.registrationDate) {
+                    const date = new Date(registeredUser.registrationDate);
+                    const options = { month: 'short', year: 'numeric' };
+                    dashboardRegistered.textContent = date.toLocaleDateString('en-US', options);
+                }
+            } else {
+                dashboardPhone.textContent = 'Not provided';
+                dashboardRegistered.textContent = 'Recently';
+            }
+        }
+
+        // Load and display saved numbers
+        function loadSavedNumbers() {
+            if (savedNumbers.length === 0) {
+                savedNumbersList.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="px-6 py-8 text-center text-slate-400">
+                            No saved numbers yet. Recharge a number to save it automatically.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            savedNumbersList.innerHTML = savedNumbers.map(item => `
+                <tr class="hover:bg-white/5 transition">
+                    <td class="px-6 py-4 text-sm font-semibold">${item.number}</td>
+                    <td class="px-6 py-4 text-sm">
+                        <span class="px-2 py-1 rounded-lg bg-amber-500/20 text-amber-200 text-xs font-semibold">${item.operator}</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-slate-300">${item.circle}</td>
+                    <td class="px-6 py-4 text-sm">
+                        <button class="text-amber-400 hover:text-amber-300 transition font-semibold" onclick="quickRecharge('${item.number}', '${item.operator}')">
+                            Recharge
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Quick recharge function
+        window.quickRecharge = function(number, operator) {
+            // Store for recharge page
+            localStorage.setItem('quickRechargeNumber', number);
+            localStorage.setItem('rechargeOperator', operator.toLowerCase());
+            
+            // Redirect to recharge page
+            window.location.href = 'recharge.html';
+        };
+
+        // Load and display recharge history
+        function loadRechargeHistory() {
+            const history = JSON.parse(localStorage.getItem('rechargeHistory') || '[]');
+            
+            if (history.length === 0) {
+                rechargeHistoryTable.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="px-6 py-8 text-center text-slate-400">
+                            No recharge history yet. Start your first recharge!
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Display only recent 10 recharges
+            const recentHistory = history.slice(0, 10);
+            
+            rechargeHistoryTable.innerHTML = recentHistory.map(item => {
+                const date = new Date(item.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                });
+                
+                const statusClass = item.status === 'success' 
+                    ? 'bg-emerald-500/20 text-emerald-400' 
+                    : 'bg-rose-500/20 text-rose-400';
+                
+                return `
+                    <tr class="hover:bg-white/5 transition">
+                        <td class="px-6 py-4 text-sm text-slate-300">${formattedDate}</td>
+                        <td class="px-6 py-4 text-sm font-semibold">${item.mobile}</td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="px-2 py-1 rounded-lg bg-amber-500/20 text-amber-200 text-xs font-semibold uppercase">${item.operator}</span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-300">${item.plan}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-amber-400">₹${item.amount}</td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="px-2 py-1 rounded-full ${statusClass} text-xs font-semibold capitalize">${item.status}</span>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Calculate and update stats
+        function updateStats() {
+            const history = JSON.parse(localStorage.getItem('rechargeHistory') || '[]');
+            
+            // Total recharges
+            const totalRecharges = history.length;
+            const totalRechargesEl = document.querySelector('.text-sky-400');
+            if (totalRechargesEl) {
+                totalRechargesEl.textContent = totalRecharges;
+            }
+            
+            // Total cashback (assuming 5% cashback)
+            const totalAmount = history.reduce((sum, item) => sum + (item.amount || 0), 0);
+            const cashback = Math.floor(totalAmount * 0.05);
+            const cashbackEl = document.querySelector('.text-emerald-400');
+            if (cashbackEl) {
+                cashbackEl.textContent = `₹${cashback}`;
+            }
+            
+            // Available balance (simulated)
+            const balanceEl = document.querySelector('.text-amber-400');
+            if (balanceEl) {
+                const balance = Math.floor(cashback * 0.4); // 40% of cashback as available balance
+                balanceEl.textContent = `₹${balance}`;
+            }
+        }
+
+        // Logout functionality
+        function logout() {
+            // Show confirmation
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear user session
+                const userData = JSON.parse(localStorage.getItem('rechargeXUser') || '{}');
+                userData.isLoggedIn = false;
+                localStorage.setItem('rechargeXUser', JSON.stringify(userData));
+                
+                // Redirect to home page
+                window.location.href = 'index.html';
+            }
+        }
+
+        logoutBtn.addEventListener('click', logout);
+        logoutBtn2.addEventListener('click', logout);
+
+        // Initialize dashboard on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadUserData();
+            loadSavedNumbers();
+            loadRechargeHistory();
+            updateStats();
+            
+            // Auto-refresh history every 30 seconds if new recharges are added
+            setInterval(() => {
+                const currentHistory = JSON.parse(localStorage.getItem('rechargeHistory') || '[]');
+                const displayedRows = rechargeHistoryTable.querySelectorAll('tr').length;
+                
+                if (currentHistory.length > 0 && currentHistory.length !== displayedRows) {
+                    loadRechargeHistory();
+                    updateStats();
+                }
+            }, 30000);
+        });
+
+        // Add animation to stats on load
+        window.addEventListener('load', function() {
+            const statElements = document.querySelectorAll('.text-3xl.font-bold');
+            statElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    el.style.transition = 'all 0.5s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

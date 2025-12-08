@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Recharge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .input {
+            @apply w-full bg-slate-900/60 border border-white/15 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50 transition;
+        }
+    </style>
+</head>
+<body id="rechargePage" class="bg-slate-950 text-white">
+    <header class="sticky top-0 z-30 bg-slate-950/90 backdrop-blur border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-900 font-black">RX</div>
+                <p class="font-semibold">RechargeX</p>
+            </a>
+            <nav class="hidden md:flex items-center gap-6 text-sm text-slate-200">
+                <a href="index.html" class="hover:text-amber-200 transition">Home</a>
+                <a href="plans.html" class="hover:text-amber-200 transition">Plans</a>
+                <a href="recharge.html" class="text-amber-200 font-semibold">Recharge</a>
+                <a href="login.html" class="hover:text-amber-200 transition">Login</a>
+            </nav>
+            <a href="register.html" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400 to-orange-600 text-slate-900 font-semibold shadow-lg shadow-orange-500/30 hover:shadow-orange-400/40 transition">Create account</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+        <section class="grid md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 space-y-3">
+                <p class="text-amber-200 text-sm font-semibold">Recharge flow</p>
+                <h1 class="text-3xl md:text-4xl font-bold">Confirm your recharge</h1>
+                <p class="text-slate-300">Enter the number, select operator and circle, pick a plan, and confirm in a modal.</p>
+            </div>
+        </section>
+
+        <section class="grid lg:grid-cols-2 gap-8">
+            <div class="bg-slate-900/40 border border-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-lg shadow-amber-500/10 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-semibold">Recharge details</h2>
+                    <span id="formStatus" class="text-xs px-3 py-1 rounded-full bg-white/10 text-slate-200">Awaiting input</span>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <label class="text-sm text-slate-200 block mb-2" for="rechargeMobile">Mobile number</label>
+                        <input id="rechargeMobile" type="tel" maxlength="10" inputmode="numeric" placeholder="Enter 10-digit number" class="input" />
+                        <p id="mobileError" class="text-xs text-rose-300 hidden mt-1">Enter a valid 10-digit number</p>
+                    </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="text-sm text-slate-200 block" for="rechargeOperator">Operator</label>
+                        <select id="rechargeOperator" class="w-full bg-slate-900/60 border border-white/15 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-300 transition">
+                            <option value="">Select operator</option>
+                            <option value="airtel">Airtel</option>
+                            <option value="jio">Jio</option>
+                            <option value="vi">Vi</option>
+                            <option value="bsnl">BSNL</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm text-slate-200 block" for="rechargeCircle">Circle / Region</label>
+                        <select id="rechargeCircle" class="w-full bg-slate-900/60 border border-white/15 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-300 transition">
+                            <option value="">Select region</option>
+                            <option value="delhi">Delhi NCR</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="karnataka">Karnataka</option>
+                            <option value="tamilnadu">Tamil Nadu</option>
+                            <option value="kerala">Kerala</option>
+                            <option value="gujarat">Gujarat</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm text-slate-200 block">Plan suggestions</label>
+                    <div id="rechargePlansGrid" class="grid sm:grid-cols-2 gap-3">
+                        <!-- Plan cards will be populated here -->
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 pt-2">
+                    <button id="openConfirmModal" class="flex-1 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-orange-600 text-slate-900 font-semibold disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-orange-500/30 hover:shadow-orange-400/40 transition" disabled>Confirm recharge</button>
+                    <button id="clearRecharge" type="reset" class="px-4 py-3 rounded-xl border border-white/15 text-white hover:border-amber-300 hover:bg-white/5 transition">Reset</button>
+                </div>
+                <p id="selectedPlanHint" class="text-xs text-slate-300">Select a plan to proceed.</p>
+            </div>
+
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-6 space-y-4 shadow-lg shadow-amber-500/5">
+                <h2 class="text-xl font-semibold">Recharge summary</h2>
+                <div class="flex items-center justify-between text-sm text-slate-300">
+                    <span>Number</span>
+                    <span id="summaryNumber" class="font-semibold">—</span>
+                </div>
+                <div class="flex items-center justify-between text-sm text-slate-300">
+                    <span>Operator</span>
+                    <span id="summaryOperator" class="font-semibold">—</span>
+                </div>
+                <div class="flex items-center justify-between text-sm text-slate-300">
+                    <span>Circle</span>
+                    <span id="summaryCircle" class="font-semibold">—</span>
+                </div>
+                <div class="flex items-center justify-between text-sm text-slate-300">
+                    <span>Plan</span>
+                    <span id="summaryPlan" class="font-semibold">Select a plan</span>
+                </div>
+                <div class="border-t border-white/10 pt-4 mt-4">
+                    <div class="flex items-center justify-between">
+                        <span class="font-semibold">Total Amount</span>
+                        <span id="summaryPrice" class="text-lg font-bold text-amber-400">—</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+            <div class="bg-slate-900 border border-white/10 rounded-3xl max-w-md w-full p-8 shadow-2xl shadow-orange-500/20">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Confirm recharge</h2>
+                    <button id="closeModal" type="button" class="text-slate-400 hover:text-white text-2xl leading-none">×</button>
+                </div>
+
+                <div class="space-y-4 bg-slate-900/40 border border-white/10 rounded-2xl p-4 mb-6">
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-400">Number</span>
+                        <span id="modalNumber" class="font-semibold">—</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-400">Operator</span>
+                        <span id="modalOperator" class="font-semibold">—</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-400">Circle</span>
+                        <span id="modalCircle" class="font-semibold">—</span>
+                    </div>
+                    <div class="border-t border-white/10 pt-4 mt-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-400">Plan</span>
+                            <span id="modalPlan" class="font-semibold">—</span>
+                        </div>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="font-semibold text-lg">Amount</span>
+                            <span id="modalAmount" class="text-2xl font-bold text-amber-400">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    <button id="cancelRecharge" type="button" class="flex-1 px-4 py-3 rounded-xl border border-white/15 text-white hover:border-amber-300 hover:bg-white/5 transition font-semibold">Cancel</button>
+                    <button id="submitRecharge" type="button" class="flex-1 px-4 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-orange-600 text-slate-900 font-semibold shadow-lg shadow-orange-500/30 hover:shadow-orange-400/40 transition">Confirm & Pay</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-6 text-center text-sm text-slate-300">
+            <p>RechargeX</p>
+        </div>
+    </footer>
+
+    <script>
+        // Day 4: JavaScript Functionality for Recharge Page
+        
+        // Phone validation regex
+        const phoneRegex = /^[6-9]\d{9}$/;
+        
+        // Sample plans data (matching plans.html)
+        const rechargePlans = {
+            airtel: [
+                { id: 101, price: 199, data: '2 GB/Day', validity: 28, name: 'Data Booster' },
+                { id: 102, price: 299, data: '1.5 GB/Day', validity: 56, name: 'Long Duration' },
+                { id: 103, price: 479, data: '2 GB/Day', validity: 56, name: 'Premium Plan' }
+            ],
+            jio: [
+                { id: 201, price: 239, data: '2 GB/Day', validity: 28, name: 'JioPhone Pack' },
+                { id: 202, price: 349, data: '2 GB/Day', validity: 56, name: '5G Unlimited' },
+                { id: 203, price: 666, data: '1.5 GB/Day', validity: 84, name: '5G Annual' }
+            ],
+            vi: [
+                { id: 301, price: 219, data: '1 GB/Day', validity: 28, name: 'Basic Plan' },
+                { id: 302, price: 379, data: '2 GB/Day', validity: 56, name: 'Value Pack' },
+                { id: 303, price: 699, data: '1.5 GB/Day', validity: 84, name: 'Long Validity' }
+            ],
+            bsnl: [
+                { id: 401, price: 99, data: '2 GB/Day', validity: 18, name: 'Budget Pack' },
+                { id: 402, price: 187, data: '2 GB/Day', validity: 28, name: 'Value Plan' },
+                { id: 403, price: 397, data: '2 GB/Day', validity: 70, name: 'Extended Validity' }
+            ]
+        };
+
+        // Get DOM elements
+        const mobileInput = document.getElementById('rechargeMobile');
+        const operatorSelect = document.getElementById('rechargeOperator');
+        const circleSelect = document.getElementById('rechargeCircle');
+        const plansGrid = document.getElementById('rechargePlansGrid');
+        const confirmBtn = document.getElementById('openConfirmModal');
+        const resetBtn = document.getElementById('clearRecharge');
+        const formStatus = document.getElementById('formStatus');
+        const mobileError = document.getElementById('mobileError');
+        const planHint = document.getElementById('selectedPlanHint');
+        
+        // Summary elements
+        const summaryNumber = document.getElementById('summaryNumber');
+        const summaryOperator = document.getElementById('summaryOperator');
+        const summaryCircle = document.getElementById('summaryCircle');
+        const summaryPlan = document.getElementById('summaryPlan');
+        const summaryPrice = document.getElementById('summaryPrice');
+        
+        // Modal elements
+        const modal = document.getElementById('confirmModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelRecharge');
+        const submitBtn = document.getElementById('submitRecharge');
+        const modalNumber = document.getElementById('modalNumber');
+        const modalOperator = document.getElementById('modalOperator');
+        const modalCircle = document.getElementById('modalCircle');
+        const modalPlan = document.getElementById('modalPlan');
+        const modalAmount = document.getElementById('modalAmount');
+
+        // Current recharge state
+        let rechargeData = {
+            mobile: '',
+            operator: '',
+            circle: '',
+            selectedPlan: null
+        };
+
+        // Mobile number validation
+        mobileInput.addEventListener('input', function() {
+            // Allow only numbers
+            this.value = this.value.replace(/\D/g, '');
+            
+            const mobile = this.value;
+            rechargeData.mobile = mobile;
+            
+            if (mobile && !phoneRegex.test(mobile)) {
+                mobileError.classList.remove('hidden');
+                this.classList.add('border-rose-500');
+            } else {
+                mobileError.classList.add('hidden');
+                this.classList.remove('border-rose-500');
+                if (mobile.length === 10) {
+                    summaryNumber.textContent = mobile;
+                }
+            }
+            
+            updateFormStatus();
+            updateConfirmButton();
+        });
+
+        // Operator selection
+        operatorSelect.addEventListener('change', function() {
+            rechargeData.operator = this.value;
+            summaryOperator.textContent = this.value ? this.value.toUpperCase() : '—';
+            
+            // Store for plans page
+            if (this.value) {
+                localStorage.setItem('rechargeOperator', this.value);
+            }
+            
+            // Load plans for selected operator
+            if (this.value && rechargePlans[this.value]) {
+                displayPlans(rechargePlans[this.value]);
+            } else {
+                plansGrid.innerHTML = '<p class="col-span-2 text-sm text-slate-400">Select an operator to see plans</p>';
+            }
+            
+            // Reset selected plan
+            rechargeData.selectedPlan = null;
+            summaryPlan.textContent = 'Select a plan';
+            summaryPrice.textContent = '—';
+            
+            updateFormStatus();
+            updateConfirmButton();
+        });
+
+        // Circle selection
+        circleSelect.addEventListener('change', function() {
+            rechargeData.circle = this.value;
+            summaryCircle.textContent = this.options[this.selectedIndex].text || '—';
+            updateFormStatus();
+            updateConfirmButton();
+        });
+
+        // Display plans
+        function displayPlans(plans) {
+            plansGrid.innerHTML = plans.map(plan => `
+                <button type="button" class="plan-card text-left p-4 rounded-xl bg-slate-900/60 border border-white/15 hover:border-amber-300 transition" data-plan='${JSON.stringify(plan)}' onclick="selectPlan(this)">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-lg font-bold text-amber-400">₹${plan.price}</span>
+                    </div>
+                    <p class="text-sm font-semibold mb-2">${plan.name}</p>
+                    <p class="text-xs text-slate-400">${plan.data} • ${plan.validity} days</p>
+                </button>
+            `).join('');
+        }
+
+        // Select plan
+        window.selectPlan = function(element) {
+            const planData = JSON.parse(element.getAttribute('data-plan'));
+            
+            // Remove selection from all cards
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.classList.remove('border-amber-400', 'bg-amber-500/10');
+                card.classList.add('border-white/15');
+            });
+            
+            // Highlight selected card
+            element.classList.add('border-amber-400', 'bg-amber-500/10');
+            element.classList.remove('border-white/15');
+            
+            // Update recharge data
+            rechargeData.selectedPlan = planData;
+            
+            // Update summary
+            summaryPlan.textContent = `${planData.name} (${planData.data})`;
+            summaryPrice.textContent = `₹${planData.price}`;
+            
+            updateFormStatus();
+            updateConfirmButton();
+        };
+
+        // Update form status
+        function updateFormStatus() {
+            if (rechargeData.mobile && rechargeData.operator && rechargeData.circle && rechargeData.selectedPlan) {
+                formStatus.textContent = 'Ready to confirm';
+                formStatus.classList.remove('bg-white/10', 'text-slate-200');
+                formStatus.classList.add('bg-emerald-500/20', 'text-emerald-200');
+            } else {
+                formStatus.textContent = 'Awaiting input';
+                formStatus.classList.remove('bg-emerald-500/20', 'text-emerald-200');
+                formStatus.classList.add('bg-white/10', 'text-slate-200');
+            }
+        }
+
+        // Update confirm button state
+        function updateConfirmButton() {
+            const isValid = phoneRegex.test(rechargeData.mobile) && 
+                           rechargeData.operator && 
+                           rechargeData.circle && 
+                           rechargeData.selectedPlan;
+            
+            confirmBtn.disabled = !isValid;
+            
+            if (isValid) {
+                planHint.textContent = 'All set! Click to confirm your recharge.';
+                planHint.classList.remove('text-slate-300');
+                planHint.classList.add('text-emerald-300');
+            } else {
+                planHint.textContent = 'Complete all fields to proceed.';
+                planHint.classList.remove('text-emerald-300');
+                planHint.classList.add('text-slate-300');
+            }
+        }
+
+        // Open confirmation modal
+        confirmBtn.addEventListener('click', function() {
+            // Populate modal with data
+            modalNumber.textContent = rechargeData.mobile;
+            modalOperator.textContent = rechargeData.operator.toUpperCase();
+            modalCircle.textContent = circleSelect.options[circleSelect.selectedIndex].text;
+            modalPlan.textContent = `${rechargeData.selectedPlan.name} (${rechargeData.selectedPlan.data}, ${rechargeData.selectedPlan.validity} days)`;
+            modalAmount.textContent = `₹${rechargeData.selectedPlan.price}`;
+            
+            // Show modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        // Click outside modal to close
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Submit recharge
+        submitBtn.addEventListener('click', function() {
+            this.textContent = 'Processing...';
+            this.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Store recharge in history
+                const rechargeHistory = JSON.parse(localStorage.getItem('rechargeHistory') || '[]');
+                rechargeHistory.unshift({
+                    id: Date.now(),
+                    date: new Date().toISOString(),
+                    mobile: rechargeData.mobile,
+                    operator: rechargeData.operator,
+                    circle: circleSelect.options[circleSelect.selectedIndex].text,
+                    plan: rechargeData.selectedPlan.name,
+                    amount: rechargeData.selectedPlan.price,
+                    status: 'success'
+                });
+                localStorage.setItem('rechargeHistory', JSON.stringify(rechargeHistory));
+                
+                // Success feedback
+                this.textContent = 'Success!';
+                this.classList.remove('from-amber-400', 'to-orange-600');
+                this.classList.add('bg-emerald-500');
+                
+                // Redirect after short delay
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            }, 1500);
+        });
+
+        // Reset form
+        resetBtn.addEventListener('click', function() {
+            rechargeData = {
+                mobile: '',
+                operator: '',
+                circle: '',
+                selectedPlan: null
+            };
+            
+            mobileInput.value = '';
+            operatorSelect.value = '';
+            circleSelect.value = '';
+            plansGrid.innerHTML = '<p class="col-span-2 text-sm text-slate-400">Select an operator to see plans</p>';
+            
+            summaryNumber.textContent = '—';
+            summaryOperator.textContent = '—';
+            summaryCircle.textContent = '—';
+            summaryPlan.textContent = 'Select a plan';
+            summaryPrice.textContent = '—';
+            
+            mobileError.classList.add('hidden');
+            mobileInput.classList.remove('border-rose-500');
+            
+            updateFormStatus();
+            updateConfirmButton();
+            
+            // Visual feedback
+            this.textContent = 'Reset Done';
+            setTimeout(() => {
+                this.textContent = 'Reset';
+            }, 1000);
+        });
+
+        // Check for selected plan from plans page
+        window.addEventListener('DOMContentLoaded', function() {
+            const selectedPlan = localStorage.getItem('selectedPlan');
+            if (selectedPlan) {
+                const plan = JSON.parse(selectedPlan);
+                
+                // Set operator
+                operatorSelect.value = plan.operator;
+                rechargeData.operator = plan.operator;
+                summaryOperator.textContent = plan.operator.toUpperCase();
+                
+                // Load and select plan
+                if (rechargePlans[plan.operator]) {
+                    displayPlans(rechargePlans[plan.operator]);
+                    
+                    // Auto-select the plan after short delay
+                    setTimeout(() => {
+                        const planCard = document.querySelector(`[data-plan*='"id":${plan.id}']`);
+                        if (planCard) {
+                            planCard.click();
+                        }
+                    }, 100);
+                }
+                
+                // Clear the stored plan
+                localStorage.removeItem('selectedPlan');
+            }
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

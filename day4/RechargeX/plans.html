@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Plans</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .input {
+            @apply w-full bg-slate-900/60 border border-white/15 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50 transition;
+        }
+    </style>
+</head>
+<body id="plansPage" class="bg-slate-950 text-white">
+    <header class="sticky top-0 z-30 bg-slate-950/90 backdrop-blur border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-900 font-black">RX</div>
+                <p class="font-semibold">RechargeX</p>
+            </a>
+            <nav class="hidden md:flex items-center gap-6 text-sm text-slate-200">
+                <a href="index.html" class="hover:text-amber-200 transition">Home</a>
+                <a href="plans.html" class="text-amber-200 font-semibold">Plans</a>
+                <a href="recharge.html" class="hover:text-amber-200 transition">Recharge</a>
+                <a href="login.html" class="hover:text-amber-200 transition">Login</a>
+            </nav>
+            <a href="register.html" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400 to-orange-600 text-slate-900 font-semibold shadow-lg shadow-orange-500/30 hover:shadow-orange-400/40 transition">Create account</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+        <section class="grid md:grid-cols-3 gap-6 items-start">
+            <div class="md:col-span-2 space-y-3">
+                <p class="text-amber-200 text-sm font-semibold">Browse curated plans</p>
+                <h1 class="text-3xl md:text-4xl font-bold">Pick the perfect recharge</h1>
+                <p class="text-slate-300">Filter by operator and price range. Cards update instantly with data, validity, and perks.</p>
+            </div>
+            <div class="flex md:justify-end">
+                <a href="recharge.html" class="px-5 py-3 rounded-xl bg-white/10 border border-white/10 hover:border-amber-300 text-white transition">Go to recharge</a>
+            </div>
+        </section>
+
+        <section class="bg-slate-900/40 border border-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-lg shadow-amber-500/10">
+            <div class="grid md:grid-cols-3 gap-4 items-end">
+                <div class="space-y-2">
+                    <label class="text-sm text-slate-300 block" for="operatorSelect">Operator</label>
+                    <select id="operatorSelect" class="w-full bg-slate-900/60 border border-white/15 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-300 transition">
+                        <option value="airtel">Airtel</option>
+                        <option value="jio">Jio</option>
+                        <option value="vi">Vi</option>
+                        <option value="bsnl">BSNL</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm text-slate-300 block" for="priceFilter">Max price (₹)</label>
+                    <div class="flex items-center gap-3">
+                        <input id="priceFilter" type="range" min="99" max="2000" step="10" value="2000" class="w-full accent-amber-400">
+                        <span id="priceValue" class="w-16 text-right font-semibold">₹2000</span>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm text-slate-300 block">Quick actions</label>
+                    <div class="flex gap-3">
+                        <button id="resetPlans" class="flex-1 px-4 py-3 rounded-lg border border-white/15 text-white hover:border-amber-300 hover:bg-white/5 transition">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="flex items-center justify-between mb-4 text-sm text-slate-300">
+                <span>Showing plans</span>
+                <span id="plansCount" class="text-amber-200 font-semibold">0 plans</span>
+            </div>
+            <div id="plansGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Sample plan cards -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-white/10 rounded-2xl p-6 hover:border-amber-300/50 transition">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-amber-400">₹199</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-amber-500/20 text-amber-200">Popular</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">Data Plan</h3>
+                    <div class="space-y-2 text-sm text-slate-300 mb-4">
+                        <p>2 GB / Day</p>
+                        <p>Validity: 28 days</p>
+                        <p>Speed: 4G</p>
+                    </div>
+                    <button class="w-full px-4 py-2 rounded-lg bg-amber-500/20 text-amber-200 border border-amber-500/30 hover:bg-amber-500/30 transition">Select Plan</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-6 text-center text-sm text-slate-300">
+            <p>RechargeX</p>
+        </div>
+    </footer>
+
+    <script>
+        // Day 4: JavaScript Functionality for Plans Page
+        
+        // Sample plans data
+        const allPlans = [
+            { id: 1, operator: 'airtel', price: 199, data: '2 GB/Day', validity: 28, speed: '4G', popular: true, unlimited: true, name: 'Data Booster' },
+            { id: 2, operator: 'airtel', price: 299, data: '1.5 GB/Day', validity: 56, speed: '4G', popular: false, unlimited: true, name: 'Long Duration' },
+            { id: 3, operator: 'airtel', price: 479, data: '2 GB/Day', validity: 56, speed: '4G', popular: true, unlimited: true, name: 'Premium Plan' },
+            { id: 4, operator: 'airtel', price: 719, data: '2 GB/Day', validity: 84, speed: '4G', popular: false, unlimited: true, name: 'Quarterly Pack' },
+            { id: 5, operator: 'jio', price: 239, data: '2 GB/Day', validity: 28, speed: '4G', popular: true, unlimited: true, name: 'JioPhone Pack' },
+            { id: 6, operator: 'jio', price: 349, data: '2 GB/Day', validity: 56, speed: '5G', popular: false, unlimited: true, name: '5G Unlimited' },
+            { id: 7, operator: 'jio', price: 666, data: '1.5 GB/Day', validity: 84, speed: '5G', popular: true, unlimited: true, name: '5G Annual' },
+            { id: 8, operator: 'jio', price: 999, data: '2.5 GB/Day', validity: 84, speed: '5G', popular: false, unlimited: true, name: 'Premium 5G' },
+            { id: 9, operator: 'vi', price: 219, data: '1 GB/Day', validity: 28, speed: '4G', popular: false, unlimited: true, name: 'Basic Plan' },
+            { id: 10, operator: 'vi', price: 379, data: '2 GB/Day', validity: 56, speed: '4G', popular: true, unlimited: true, name: 'Value Pack' },
+            { id: 11, operator: 'vi', price: 699, data: '1.5 GB/Day', validity: 84, speed: '4G', popular: false, unlimited: true, name: 'Long Validity' },
+            { id: 12, operator: 'bsnl', price: 99, data: '2 GB/Day', validity: 18, speed: '4G', popular: false, unlimited: false, name: 'Budget Pack' },
+            { id: 13, operator: 'bsnl', price: 187, data: '2 GB/Day', validity: 28, speed: '4G', popular: true, unlimited: true, name: 'Value Plan' },
+            { id: 14, operator: 'bsnl', price: 397, data: '2 GB/Day', validity: 70, speed: '4G', popular: false, unlimited: true, name: 'Extended Validity' },
+            { id: 15, operator: 'airtel', price: 155, data: '1 GB/Day', validity: 24, speed: '4G', popular: false, unlimited: false, name: 'Short Term' },
+            { id: 16, operator: 'jio', price: 155, data: '2 GB/Day', validity: 14, speed: '5G', popular: false, unlimited: true, name: 'Quick Recharge' },
+            { id: 17, operator: 'vi', price: 149, data: '1 GB/Day', validity: 21, speed: '4G', popular: false, unlimited: false, name: 'Starter Pack' },
+            { id: 18, operator: 'airtel', price: 1799, data: '2 GB/Day', validity: 365, speed: '4G', popular: true, unlimited: true, name: 'Annual Gold' }
+        ];
+
+        // Get DOM elements
+        const operatorSelect = document.getElementById('operatorSelect');
+        const priceFilter = document.getElementById('priceFilter');
+        const priceValue = document.getElementById('priceValue');
+        const resetBtn = document.getElementById('resetPlans');
+        const plansGrid = document.getElementById('plansGrid');
+        const plansCount = document.getElementById('plansCount');
+
+        // Current filter state
+        let currentFilters = {
+            operator: 'airtel',
+            maxPrice: 2000
+        };
+
+        // Update price display
+        priceFilter.addEventListener('input', function() {
+            const value = this.value;
+            priceValue.textContent = '₹' + value;
+            currentFilters.maxPrice = parseInt(value);
+            filterAndDisplayPlans();
+        });
+
+        // Operator filter
+        operatorSelect.addEventListener('change', function() {
+            currentFilters.operator = this.value;
+            filterAndDisplayPlans();
+        });
+
+        // Reset filters
+        resetBtn.addEventListener('click', function() {
+            operatorSelect.value = 'airtel';
+            priceFilter.value = 2000;
+            priceValue.textContent = '₹2000';
+            currentFilters = {
+                operator: 'airtel',
+                maxPrice: 2000
+            };
+            filterAndDisplayPlans();
+            
+            // Visual feedback
+            this.textContent = 'Reset Done';
+            setTimeout(() => {
+                this.textContent = 'Reset';
+            }, 1000);
+        });
+
+        // Filter and display plans
+        function filterAndDisplayPlans() {
+            const filteredPlans = allPlans.filter(plan => {
+                return plan.operator === currentFilters.operator && 
+                       plan.price <= currentFilters.maxPrice;
+            });
+
+            displayPlans(filteredPlans);
+        }
+
+        // Display plans in grid
+        function displayPlans(plans) {
+            if (plans.length === 0) {
+                plansGrid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <h3 class="text-xl font-semibold mb-2">No plans found</h3>
+                        <p class="text-slate-400">Try adjusting your filters to see more plans</p>
+                    </div>
+                `;
+                plansCount.textContent = '0 plans';
+                return;
+            }
+
+            plansGrid.innerHTML = plans.map(plan => `
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-white/10 rounded-2xl p-6 hover:border-amber-300/50 transition transform hover:scale-105 duration-200" data-plan-id="${plan.id}">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-amber-400">₹${plan.price}</span>
+                        ${plan.popular ? '<span class="text-xs px-3 py-1 rounded-full bg-amber-500/20 text-amber-200 border border-amber-500/30">Popular</span>' : ''}
+                    </div>
+                    <h3 class="text-lg font-semibold mb-3">${plan.name}</h3>
+                    <div class="space-y-2 text-sm text-slate-300 mb-4">
+                        <p>${plan.data}</p>
+                        <p>Validity: ${plan.validity} days</p>
+                        <p>Speed: ${plan.speed}</p>
+                        ${plan.unlimited ? '<p>Unlimited Calls</p>' : ''}
+                    </div>
+                    <button class="select-plan-btn w-full px-4 py-2 rounded-lg bg-amber-500/20 text-amber-200 border border-amber-500/30 hover:bg-amber-500/30 transition" onclick="selectPlan(${plan.id})">
+                        Select Plan
+                    </button>
+                </div>
+            `).join('');
+
+            plansCount.textContent = `${plans.length} plan${plans.length !== 1 ? 's' : ''}`;
+        }
+
+        // Select plan and store in localStorage
+        window.selectPlan = function(planId) {
+            const selectedPlan = allPlans.find(p => p.id === planId);
+            if (selectedPlan) {
+                // Store selected plan
+                localStorage.setItem('selectedPlan', JSON.stringify(selectedPlan));
+                
+                // Visual feedback
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Plan Selected';
+                btn.classList.add('bg-emerald-500/30', 'border-emerald-500/50');
+                btn.classList.remove('bg-amber-500/20', 'border-amber-500/30');
+                
+                // Redirect to recharge page after short delay
+                setTimeout(() => {
+                    window.location.href = 'recharge.html';
+                }, 800);
+            }
+        };
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            filterAndDisplayPlans();
+            
+            // Check if coming back from recharge page with stored operator
+            const storedOperator = localStorage.getItem('rechargeOperator');
+            if (storedOperator && ['airtel', 'jio', 'vi', 'bsnl'].includes(storedOperator.toLowerCase())) {
+                operatorSelect.value = storedOperator.toLowerCase();
+                currentFilters.operator = storedOperator.toLowerCase();
+                filterAndDisplayPlans();
+            }
+        });
+
+        // Add smooth scroll to plans when filters change
+        operatorSelect.addEventListener('change', () => {
+            setTimeout(() => {
+                plansGrid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

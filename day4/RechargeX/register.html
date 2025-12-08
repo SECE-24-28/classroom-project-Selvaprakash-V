@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .input {
+            @apply w-full bg-slate-900/60 border border-white/15 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50 transition;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 min-h-screen flex items-center justify-center px-4 py-10">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-slate-950/90 backdrop-blur border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-900 font-black text-sm">RX</div>
+                <span class="text-white font-semibold">RechargeX</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-6 text-sm text-slate-200">
+                <a href="index.html" class="hover:text-amber-200 transition">Home</a>
+                <a href="login.html" class="hover:text-amber-200 transition">Sign in</a>
+                <a href="register.html" class="text-amber-200 font-semibold">Sign up</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="w-full max-w-xl rounded-3xl bg-slate-900 border border-white/10 p-8 shadow-2xl shadow-orange-500/10 mt-20">
+        <div class="text-center mb-8 space-y-2">
+            <div class="mx-auto w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-900 font-black text-lg">RX</div>
+            <h1 class="text-2xl font-bold text-white">Create your RechargeX account</h1>
+            <p class="text-slate-300 text-sm">Store details locally for this demo. No backend required.</p>
+        </div>
+
+        <form id="registerForm" class="grid gap-4 md:grid-cols-2">
+            <div class="md:col-span-2 space-y-2">
+                <label class="text-sm text-slate-200 block" for="registerName">Full name</label>
+                <input id="registerName" type="text" name="fullname" placeholder="Alex Johnson" class="input" required />
+                <p id="registerNameError" class="text-xs text-rose-300 hidden">Name must be at least 3 characters</p>
+            </div>
+            <div class="space-y-2">
+                <label class="text-sm text-slate-200 block" for="registerEmail">Email</label>
+                <input id="registerEmail" type="email" name="email" placeholder="you@example.com" class="input" required />
+                <p id="registerEmailError" class="text-xs text-rose-300 hidden">Please enter a valid email</p>
+            </div>
+            <div class="space-y-2">
+                <label class="text-sm text-slate-200 block" for="registerPhone">Phone</label>
+                <input id="registerPhone" type="tel" name="phone" maxlength="10" inputmode="numeric" placeholder="10-digit number" class="input" required />
+                <p id="registerPhoneError" class="text-xs text-rose-300 hidden">Please enter a valid 10-digit number</p>
+            </div>
+            <div class="space-y-2">
+                <label class="text-sm text-slate-200 block" for="registerPassword">Password</label>
+                <input id="registerPassword" type="password" name="password" placeholder="Minimum 6 characters" class="input" required />
+                <p id="registerPasswordError" class="text-xs text-rose-300 hidden">Password should be at least 6 characters</p>
+            </div>
+            <div class="space-y-2">
+                <label class="text-sm text-slate-200 block" for="registerPasswordConfirm">Confirm password</label>
+                <input id="registerPasswordConfirm" type="password" name="confirmPassword" placeholder="Retype password" class="input" required />
+                <p id="registerPasswordConfirmError" class="text-xs text-rose-300 hidden">Passwords must match</p>
+            </div>
+            <div class="md:col-span-2 space-y-3">
+                <button type="submit" class="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-orange-600 text-slate-900 font-semibold shadow-lg shadow-orange-500/30 hover:shadow-orange-400/40 transition">Create account</button>
+                <p id="registerSuccess" class="text-sm text-emerald-300 hidden p-3 bg-emerald-900/20 border border-emerald-500/30 rounded-lg">Account created successfully! You can now login.</p>
+                <p id="registerError" class="text-sm text-rose-300 hidden p-3 bg-rose-900/20 border border-rose-500/30 rounded-lg">Email already exists. Try logging in.</p>
+            </div>
+        </form>
+
+        <p class="text-center text-slate-400 text-sm mt-6">Already registered? <a href="login.html" class="text-amber-200 hover:text-amber-100 transition font-semibold">Login</a></p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="fixed bottom-0 left-0 right-0 bg-slate-950 border-t border-white/10 p-4">
+        <div class="text-center text-sm text-slate-400">
+            <p>RechargeX</p>
+        </div>
+    </footer>
+
+    <script>
+        // Day 4: JavaScript Functionality for Registration Page
+        
+        // Validation regex patterns
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[6-9]\d{9}$/; // Indian mobile number format
+        
+        // Get form elements
+        const registerForm = document.getElementById('registerForm');
+        const nameInput = document.getElementById('registerName');
+        const emailInput = document.getElementById('registerEmail');
+        const phoneInput = document.getElementById('registerPhone');
+        const passwordInput = document.getElementById('registerPassword');
+        const confirmPasswordInput = document.getElementById('registerPasswordConfirm');
+        
+        // Get error elements
+        const nameError = document.getElementById('registerNameError');
+        const emailError = document.getElementById('registerEmailError');
+        const phoneError = document.getElementById('registerPhoneError');
+        const passwordError = document.getElementById('registerPasswordError');
+        const confirmPasswordError = document.getElementById('registerPasswordConfirmError');
+        const successMessage = document.getElementById('registerSuccess');
+        const errorMessage = document.getElementById('registerError');
+
+        // Real-time name validation
+        nameInput.addEventListener('input', function() {
+            const name = this.value.trim();
+            if (name && name.length < 3) {
+                nameError.classList.remove('hidden');
+                this.classList.add('border-rose-500');
+            } else {
+                nameError.classList.add('hidden');
+                this.classList.remove('border-rose-500');
+            }
+        });
+
+        // Real-time email validation
+        emailInput.addEventListener('input', function() {
+            const email = this.value.trim();
+            if (email && !emailRegex.test(email)) {
+                emailError.classList.remove('hidden');
+                this.classList.add('border-rose-500');
+            } else {
+                emailError.classList.add('hidden');
+                this.classList.remove('border-rose-500');
+            }
+        });
+
+        // Real-time phone validation (allow only numbers)
+        phoneInput.addEventListener('input', function() {
+            // Remove non-numeric characters
+            this.value = this.value.replace(/\D/g, '');
+            
+            const phone = this.value;
+            if (phone && !phoneRegex.test(phone)) {
+                phoneError.classList.remove('hidden');
+                this.classList.add('border-rose-500');
+            } else {
+                phoneError.classList.add('hidden');
+                this.classList.remove('border-rose-500');
+            }
+        });
+
+        // Real-time password validation
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            if (password && password.length < 6) {
+                passwordError.classList.remove('hidden');
+                this.classList.add('border-rose-500');
+            } else {
+                passwordError.classList.add('hidden');
+                this.classList.remove('border-rose-500');
+            }
+            
+            // Also check confirm password if it has value
+            if (confirmPasswordInput.value) {
+                checkPasswordMatch();
+            }
+        });
+
+        // Real-time confirm password validation
+        confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+
+        function checkPasswordMatch() {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                confirmPasswordError.classList.remove('hidden');
+                confirmPasswordInput.classList.add('border-rose-500');
+            } else {
+                confirmPasswordError.classList.add('hidden');
+                confirmPasswordInput.classList.remove('border-rose-500');
+            }
+        }
+
+        // Form submission handling
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Hide previous messages
+            successMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            
+            // Get values
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            
+            // Validation flags
+            let isValid = true;
+            
+            // Validate name
+            if (!name || name.length < 3) {
+                nameError.classList.remove('hidden');
+                nameInput.classList.add('border-rose-500');
+                isValid = false;
+            } else {
+                nameError.classList.add('hidden');
+                nameInput.classList.remove('border-rose-500');
+            }
+            
+            // Validate email
+            if (!email || !emailRegex.test(email)) {
+                emailError.classList.remove('hidden');
+                emailInput.classList.add('border-rose-500');
+                isValid = false;
+            } else {
+                emailError.classList.add('hidden');
+                emailInput.classList.remove('border-rose-500');
+            }
+            
+            // Validate phone
+            if (!phone || !phoneRegex.test(phone)) {
+                phoneError.classList.remove('hidden');
+                phoneInput.classList.add('border-rose-500');
+                isValid = false;
+            } else {
+                phoneError.classList.add('hidden');
+                phoneInput.classList.remove('border-rose-500');
+            }
+            
+            // Validate password
+            if (!password || password.length < 6) {
+                passwordError.classList.remove('hidden');
+                passwordInput.classList.add('border-rose-500');
+                isValid = false;
+            } else {
+                passwordError.classList.add('hidden');
+                passwordInput.classList.remove('border-rose-500');
+            }
+            
+            // Validate confirm password
+            if (!confirmPassword || password !== confirmPassword) {
+                confirmPasswordError.classList.remove('hidden');
+                confirmPasswordInput.classList.add('border-rose-500');
+                isValid = false;
+            } else {
+                confirmPasswordError.classList.add('hidden');
+                confirmPasswordInput.classList.remove('border-rose-500');
+            }
+            
+            // If valid, register user
+            if (isValid) {
+                // Check if email already exists
+                const existingUsers = JSON.parse(localStorage.getItem('rechargeXUsers') || '[]');
+                const emailExists = existingUsers.some(user => user.email === email);
+                
+                if (emailExists) {
+                    errorMessage.classList.remove('hidden');
+                    emailInput.classList.add('border-rose-500');
+                    return;
+                }
+                
+                // Create new user
+                const newUser = {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    password: password, // In real app, this would be hashed
+                    registrationDate: new Date().toISOString(),
+                    balance: 0,
+                    recharges: 0
+                };
+                
+                // Save to localStorage
+                existingUsers.push(newUser);
+                localStorage.setItem('rechargeXUsers', JSON.stringify(existingUsers));
+                
+                // Show success message
+                successMessage.classList.remove('hidden');
+                
+                const submitBtn = registerForm.querySelector('button[type="submit"]');
+                submitBtn.textContent = 'Account Created!';
+                submitBtn.disabled = true;
+                
+                // Redirect to login after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            }
+        });
+
+        // Check if user is already logged in
+        window.addEventListener('DOMContentLoaded', function() {
+            const user = localStorage.getItem('rechargeXUser');
+            if (user) {
+                const userData = JSON.parse(user);
+                if (userData.isLoggedIn) {
+                    window.location.href = 'dashboard.html';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
