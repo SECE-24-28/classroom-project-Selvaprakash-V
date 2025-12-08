@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Register</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">RechargeX</a>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Sign up</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Create account</h1>
+            <p>Store details locally for this demo</p>
+            <form id="registerForm">
+                <div>
+                    <label for="registerName">Full Name</label>
+                    <input id="registerName" type="text" name="fullname" placeholder="Alex Johnson" required />
+                    <span id="registerNameError" hidden>Name must be at least 3 characters</span>
+                </div>
+                <div>
+                    <label for="registerEmail">Email</label>
+                    <input id="registerEmail" type="email" name="email" placeholder="you@example.com" required />
+                    <span id="registerEmailError" hidden>Enter a valid email</span>
+                </div>
+                <div>
+                    <label for="registerPhone">Phone</label>
+                    <input id="registerPhone" type="tel" name="phone" maxlength="10" placeholder="10-digit number" required />
+                    <span id="registerPhoneError" hidden>Enter valid 10-digit number</span>
+                </div>
+                <div>
+                    <label for="registerPassword">Password</label>
+                    <input id="registerPassword" type="password" name="password" placeholder="Min 6 characters" required />
+                    <span id="registerPasswordError" hidden>Min 6 characters required</span>
+                </div>
+                <div>
+                    <label for="registerPasswordConfirm">Confirm Password</label>
+                    <input id="registerPasswordConfirm" type="password" name="confirmPassword" placeholder="Retype password" required />
+                    <span id="registerPasswordConfirmError" hidden>Passwords must match
+                            </span>
+                        </div>
+
+                        <div id="registerSuccess" style="display: none;">
+                            <p>Account created successfully! You can now login.</p>
+                        </div>
+
+                        <div id="registerError" style="display: none;">
+                            <p>This email already exists. Please try logging in instead.</p>
+                        </div>
+
+                        <button type="submit">Create Account</button>
+                    </fieldset>
+                </form>
+
+                <footer>
+                    <p>Already have an account? <a href="login.html">Login here</a></p>
+                </footer>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <p>RechargeX</p>
+        </div>
+    </footer>
+</body>
+</html>

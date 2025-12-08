@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Login</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">RechargeX</a>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Sign up</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Welcome back</h1>
+            <p>Login to manage your recharges</p>
+            <form id="loginForm">
+                <div>
+                    <label for="loginEmail">Email</label>
+                    <input id="loginEmail" type="email" name="email" placeholder="you@example.com" required />
+                    <span id="loginEmailError" hidden>Please enter a valid email</span>
+                </div>
+                <div>
+                    <label for="loginPassword">Password</label>
+                    <input id="loginPassword" type="password" name="password" placeholder="Min 6 characters" required />
+                    <span id="loginPasswordError" hidden>Password must be at least 6 characters</span>
+                </div>
+                <div id="loginError" hidden>Invalid credentials</div>
+                <button type="submit">Login</button>
+            </form>
+            <p>New to RechargeX? <a href="register.html">Create account</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>RechargeX</p>
+    </footer>
+</body>
+</html>

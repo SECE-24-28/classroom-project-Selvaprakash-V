@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Plans</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">RechargeX</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="plans.html">Plans</a></li>
+                <li><a href="recharge.html">Recharge</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="plansPage">
+        <section>
+            <header>
+                <h1>Pick the perfect recharge</h1>
+                <p>Filter by operator and price range. Cards update instantly with data, validity, and perks.</p>
+                <a href="recharge.html">Go to recharge</a>
+            </header>
+        </section>
+
+        <section>
+            <fieldset>
+                <legend>Filter Plans</legend>
+
+                <div>
+                    <label for="operatorSelect">Operator</label>
+                    <select id="operatorSelect" name="operator">
+                        <option value="airtel">Airtel</option>
+                        <option value="jio">Jio</option>
+                        <option value="vi">Vi</option>
+                        <option value="bsnl">BSNL</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="priceFilter">Max Price (₹)</label>
+                    <input 
+                        id="priceFilter" 
+                        type="range" 
+                        name="price" 
+                        min="99" 
+                        max="2000" 
+                        step="10" 
+                        value="2000" 
+                    />
+                    <span id="priceValue">₹2000</span>
+                </div>
+
+                <button id="resetPlans" type="reset">Reset Filters</button>
+            </fieldset>
+        </section>
+
+        <section>
+            <header>
+                <h2>Available Plans</h2>
+                <p id="plansCount">Loading plans...</p>
+            </header>
+
+            <div id="plansGrid">
+                <!-- Plan cards will be dynamically populated here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <p>RechargeX</p>
+        </div>
+    </footer>
+</body>
+</html>

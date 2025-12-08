@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Dashboard</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">RechargeX</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="recharge.html">Recharge</a></li>
+                <li><a href="plans.html">Plans</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="dashboardPage">
+        <section>
+            <header>
+                <h1>Welcome, User</h1>
+                <p>Manage your recharges and track your activity</p>
+            </header>
+        </section>
+
+        <!-- User Profile Section -->
+        <section>
+            <header>
+                <h2>Your Profile</h2>
+            </header>
+            <article>
+                <header>
+                    <h3>Account Information</h3>
+                </header>
+                <dl>
+                    <dt>Name</dt>
+                    <dd id="dashboardName">—</dd>
+
+                    <dt>Email</dt>
+                    <dd id="dashboardEmail">—</dd>
+
+                    <dt>Phone</dt>
+                    <dd id="dashboardPhone">—</dd>
+
+                    <dt>Registered Since</dt>
+                    <dd id="dashboardRegistered">—</dd>
+                </dl>
+                <button>Edit Profile</button>
+            </article>
+        </section>
+
+        <!-- Saved Numbers Section -->
+        <section>
+            <header>
+                <h2>Saved Mobile Numbers</h2>
+            </header>
+            <article>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Operator</th>
+                            <th>Circle</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="savedNumbersList">
+                        <tr>
+                            <td colspan="4">No saved numbers. <a href="recharge.html">Add one now</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+
+        <!-- Recent Recharges Section -->
+        <section>
+            <header>
+                <h2>Recent Recharge History</h2>
+            </header>
+            <article>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Number</th>
+                            <th>Operator</th>
+                            <th>Plan</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rechargeHistory">
+                        <tr>
+                            <td colspan="6">No recharge history yet. <a href="recharge.html">Start your first recharge</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+
+        <!-- Rewards Section -->
+        <section>
+            <header>
+                <h2>Your Rewards</h2>
+            </header>
+            <article>
+                <dl>
+                    <dt>Total Cashback Earned</dt>
+                    <dd id="totalCashback">₹0</dd>
+
+                    <dt>Available Balance</dt>
+                    <dd id="availableBalance">₹0</dd>
+
+                    <dt>Total Recharges</dt>
+                    <dd id="totalRecharges">0</dd>
+                </dl>
+                <button>View All Rewards</button>
+            </article>
+        </section>
+
+        <!-- Action Buttons -->
+        <section>
+            <a href="recharge.html">Start New Recharge</a>
+            <a href="plans.html">Browse Plans</a>
+            <button id="logoutBtn">Logout</button>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <p>RechargeX</p>
+        </div>
+    </footer>
+</body>
+</html>

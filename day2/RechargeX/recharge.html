@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX | Recharge</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">RechargeX</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="plans.html">Plans</a></li>
+                <li><a href="recharge.html">Recharge</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="rechargePage">
+        <section>
+            <header>
+                <h1>Confirm your recharge</h1>
+                <p>Enter the number, select operator and circle, pick a plan, and confirm in a modal.</p>
+            </header>
+        </section>
+
+        <section>
+            <article>
+                <header>
+                    <h2>Recharge Details</h2>
+                    <span id="formStatus">Awaiting input</span>
+                </header>
+
+                <form id="rechargeForm">
+                    <fieldset>
+                        <legend>Mobile Recharge Information</legend>
+
+                        <div>
+                            <label for="rechargeMobile">Mobile Number</label>
+                            <input 
+                                id="rechargeMobile" 
+                                type="tel" 
+                                name="mobile" 
+                                placeholder="Enter 10-digit number" 
+                                maxlength="10" 
+                                inputmode="numeric" 
+                                required 
+                            />
+                            <span id="mobileError" style="display: none;">
+                                Please enter a valid 10-digit number
+                            </span>
+                        </div>
+
+                        <div>
+                            <label for="rechargeOperator">Operator</label>
+                            <select id="rechargeOperator" name="operator" required>
+                                <option value="">Select operator</option>
+                                <option value="airtel">Airtel</option>
+                                <option value="jio">Jio</option>
+                                <option value="vi">Vi</option>
+                                <option value="bsnl">BSNL</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="rechargeCircle">Circle / Region</label>
+                            <select id="rechargeCircle" name="circle" required>
+                                <option value="">Select region</option>
+                                <option value="delhi">Delhi NCR</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="karnataka">Karnataka</option>
+                                <option value="tamilnadu">Tamil Nadu</option>
+                                <option value="kerala">Kerala</option>
+                                <option value="gujarat">Gujarat</option>
+                            </select>
+                        </div>
+
+                        <fieldset>
+                            <legend>Available Plans</legend>
+                            <div id="rechargePlansGrid">
+                                <!-- Plan options will be displayed here -->
+                            </div>
+                        </fieldset>
+
+                        <div>
+                            <button id="openConfirmModal" type="button">Confirm Recharge</button>
+                            <button id="clearRecharge" type="reset">Reset</button>
+                        </div>
+
+                        <p id="selectedPlanHint">Select a plan to proceed.</p>
+                    </fieldset>
+                </form>
+            </article>
+
+            <aside>
+                <header>
+                    <h2>Recharge Summary</h2>
+                </header>
+                <dl>
+                    <dt>Number</dt>
+                    <dd id="summaryNumber">—</dd>
+
+                    <dt>Operator</dt>
+                    <dd id="summaryOperator">—</dd>
+
+                    <dt>Circle</dt>
+                    <dd id="summaryCircle">—</dd>
+
+                    <dt>Plan</dt>
+                    <dd id="summaryPlan">Select a plan</dd>
+
+                    <dt>Price</dt>
+                    <dd id="summaryPrice">—</dd>
+
+                    <dt>Validity</dt>
+                    <dd id="summaryValidity">—</dd>
+
+                    <dt>Data</dt>
+                    <dd id="summaryData">—</dd>
+                </dl>
+            </aside>
+        </section>
+
+        <!-- Modal for Confirmation -->
+        <section id="confirmModal" style="display: none;">
+            <article>
+                <header>
+                    <h2>Confirm Your Recharge</h2>
+                    <button id="closeModal" type="button">Close</button>
+                </header>
+
+                <section>
+                    <h3>Recharge Details</h3>
+                    <dl>
+                        <dt>Mobile Number</dt>
+                        <dd id="modalNumber">—</dd>
+
+                        <dt>Operator</dt>
+                        <dd id="modalOperator">—</dd>
+
+                        <dt>Circle</dt>
+                        <dd id="modalCircle">—</dd>
+
+                        <dt>Selected Plan</dt>
+                        <dd id="modalPlan">—</dd>
+
+                        <dt>Amount</dt>
+                        <dd id="modalAmount">—</dd>
+                    </dl>
+                </section>
+
+                <footer>
+                    <button id="cancelRecharge" type="button">Cancel</button>
+                    <button id="submitRecharge" type="button">Confirm & Pay</button>
+                </footer>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <p>RechargeX</p>
+        </div>
+    </footer>
+</body>
+</html>
