@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "provider": "Tata Play",
+    "amount": 299,
+    "validity": "30 days",
+    "channels": "150+ channels",
+    "description": "Basic SD pack"
+  },
+  {
+    "id": 2,
+    "provider": "Tata Play",
+    "amount": 499,
+    "validity": "30 days",
+    "channels": "200+ channels",
+    "description": "HD pack with sports"
+  },
+  {
+    "id": 3,
+    "provider": "Airtel Digital TV",
+    "amount": 349,
+    "validity": "30 days",
+    "channels": "180+ channels",
+    "description": "Family entertainment pack"
+  },
+  {
+    "id": 4,
+    "provider": "Airtel Digital TV",
+    "amount": 599,
+    "validity": "30 days",
+    "channels": "250+ channels",
+    "description": "Premium HD pack"
+  },
+  {
+    "id": 5,
+    "provider": "Dish TV",
+    "amount": 279,
+    "validity": "30 days",
+    "channels": "140+ channels",
+    "description": "Basic entertainment"
+  },
+  {
+    "id": 6,
+    "provider": "Dish TV",
+    "amount": 449,
+    "validity": "30 days",
+    "channels": "190+ channels",
+    "description": "Sports + Movies pack"
+  },
+  {
+    "id": 7,
+    "provider": "Sun Direct",
+    "amount": 299,
+    "validity": "30 days",
+    "channels": "160+ channels",
+    "description": "Regional pack"
+  },
+  {
+    "id": 8,
+    "provider": "Sun Direct",
+    "amount": 549,
+    "validity": "30 days",
+    "channels": "220+ channels",
+    "description": "Premium entertainment"
+  }
+]
