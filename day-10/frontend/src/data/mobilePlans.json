@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "operator": "Airtel",
+    "amount": 199,
+    "validity": "28 days",
+    "data": "1.5GB/day",
+    "category": "popular",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 2,
+    "operator": "Airtel",
+    "amount": 299,
+    "validity": "28 days",
+    "data": "2GB/day",
+    "category": "popular",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 3,
+    "operator": "Jio",
+    "amount": 239,
+    "validity": "28 days",
+    "data": "1.5GB/day",
+    "category": "popular",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 4,
+    "operator": "Jio",
+    "amount": 349,
+    "validity": "28 days",
+    "data": "2GB/day",
+    "category": "data",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 5,
+    "operator": "Vi",
+    "amount": 219,
+    "validity": "28 days",
+    "data": "1GB/day",
+    "category": "popular",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 6,
+    "operator": "Vi",
+    "amount": 319,
+    "validity": "28 days",
+    "data": "2GB/day",
+    "category": "data",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 7,
+    "operator": "BSNL",
+    "amount": 187,
+    "validity": "28 days",
+    "data": "2GB/day",
+    "category": "popular",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 8,
+    "operator": "Airtel",
+    "amount": 399,
+    "validity": "56 days",
+    "data": "1.5GB/day",
+    "category": "validity",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 9,
+    "operator": "Jio",
+    "amount": 479,
+    "validity": "56 days",
+    "data": "1.5GB/day",
+    "category": "validity",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 10,
+    "operator": "Airtel",
+    "amount": 599,
+    "validity": "84 days",
+    "data": "2GB/day",
+    "category": "validity",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 11,
+    "operator": "Jio",
+    "amount": 666,
+    "validity": "84 days",
+    "data": "1.5GB/day",
+    "category": "validity",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 12,
+    "operator": "Vi",
+    "amount": 699,
+    "validity": "84 days",
+    "data": "1.5GB/day",
+    "category": "validity",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 13,
+    "operator": "Airtel",
+    "amount": 799,
+    "validity": "84 days",
+    "data": "2.5GB/day",
+    "category": "data",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 14,
+    "operator": "Jio",
+    "amount": 999,
+    "validity": "90 days",
+    "data": "3GB/day",
+    "category": "data",
+    "description": "Unlimited calls + 100 SMS/day"
+  },
+  {
+    "id": 15,
+    "operator": "BSNL",
+    "amount": 99,
+    "validity": "18 days",
+    "data": "2GB total",
+    "category": "talktime",
+    "description": "Unlimited calls"
+  },
+  {
+    "id": 16,
+    "operator": "Airtel",
+    "amount": 155,
+    "validity": "24 days",
+    "data": "1GB/day",
+    "category": "talktime",
+    "description": "Unlimited calls + 300 SMS"
+  }
+]
